@@ -20,6 +20,18 @@ const Grid = styled(Box)`
   margin-top: var(--size-gap);
 `
 
+const DangerLabel = styled.p`
+  margin: 0;
+  font-weight: bold;
+  color: #FF0000;
+`
+
+const SuccessLabel = styled.p`
+  margin: 0;
+  font-weight: bold;
+  color: #008000;
+`
+
 const IndexPage = ({data}) => {
   console.log(data);
   
@@ -38,8 +50,15 @@ const IndexPage = ({data}) => {
             {edge.node.name}
           </Heading>
           <div>
-            <p>${edge.node.price}</p>
-            <p>{edge.node.createDate}</p>
+            <p style={{
+              margin: 0
+            }}>${edge.node.price}</p>
+            {edge.node.inStock ? (
+              <SuccessLabel>In stock</SuccessLabel>
+            ) : (
+              <DangerLabel>Out of Stock</DangerLabel>
+            )} 
+            {/* <p>{edge.node.createDate}</p> */}
           </div>
         </Card>
       ))
@@ -74,7 +93,7 @@ export const query = graphql`
           gatsbyImageData(
             layout: CONSTRAINED
             placeholder: BLURRED
-            width: 300
+            width: 250
           )
         }
       }
