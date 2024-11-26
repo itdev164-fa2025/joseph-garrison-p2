@@ -32,9 +32,7 @@ const SuccessLabel = styled.p`
   color: #008000;
 `
 
-const IndexPage = ({data}) => {
-  console.log(data);
-  
+const IndexPage = ({data}) => {  
   return(
   <Layout>
     <Grid>
