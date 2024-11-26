@@ -35,12 +35,6 @@ const Title = styled(H1)`
 	flex: 4;
 `
 
-const MediaQuery = styled.div`
-	@media (max-width: 600px) {
-		display: none;
-		}
-`
-
 const Header = ({siteTitle}) => (
 	<StyledHeader>
 		<Section flex>
