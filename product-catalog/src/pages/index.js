@@ -3,7 +3,7 @@ import { useState } from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import styled from 'styled-components'
-import { Box, Card, Heading } from 'rebass'
+import { Box, Card, Flex, Heading } from 'rebass'
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -18,7 +18,7 @@ const Grid = styled(Box)`
     minmax(max(var(--w), 100%/ (var(--n) + 1) + 0.1%), 1fr)
   );
   margin-bottom: var(--size-gap);
-  margin-top: var(--size-gap);
+  margin-top: var(--size-gutter);
 `
 
 const StyledCard = styled(Card)`
@@ -68,12 +68,24 @@ const IndexPage = ({ data }) => {
     )
     : data.allContentfulProductCatalog.edges;
 
+  const [showInStock, setShowInStock] = useState(false)
+  
+  filteredProducts = showInStock
+    ? filteredProducts.filter(product => {
+      console.log(product);
+      
+      return product.node.inStock
+    })
+    : filteredProducts
 
 
   return (
     <Layout>
       {distinctCategories.length > 0 && (
-        <div>
+        <div style={{
+          display: `flex`,
+          justifyContent: `space-between`
+        }}>
           <TagButton
             selected={!selectedCategory}
             onClick={() => setSelectedCategory(null)}
@@ -91,6 +103,20 @@ const IndexPage = ({ data }) => {
         </div>
       )
       }
+
+      <Flex style={{
+        marginBlockStart: `var(--space-3)`,
+        justifyContent: `flex-end`,
+        fontWeight: `bold`
+        }}>
+        <input
+          type="checkbox"
+          id="stock-filter"
+          checked={showInStock}
+          onChange={() => setShowInStock(!showInStock)}
+        />
+        <label style={{marginInlineStart: `var(--space-2)`}} htmlFor="stock-filter">Exclude Out of stock</label>
+      </Flex>
 
       <Grid>
         {
