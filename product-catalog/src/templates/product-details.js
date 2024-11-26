@@ -2,7 +2,6 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from '../components/layout';
-import { H1 } from '../components/Heading'
 import { Flex, Box, Heading } from 'rebass'
 
 const ProductDetails = ({ data }) => {
